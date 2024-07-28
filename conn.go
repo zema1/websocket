@@ -282,6 +282,10 @@ type Conn struct {
 	newDecompressionReader func(io.Reader) io.ReadCloser
 }
 
+func NewRawClientConn(conn net.Conn, readBufferSize, writeBufferSize int) *Conn {
+	return newConn(conn, false, readBufferSize, writeBufferSize, nil, nil, nil)
+}
+
 func newConn(conn net.Conn, isServer bool, readBufferSize, writeBufferSize int, writeBufferPool BufferPool, br *bufio.Reader, writeBuf []byte) *Conn {
 
 	if br == nil {
